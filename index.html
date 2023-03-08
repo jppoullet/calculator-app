@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Calculator app</title>
+    <link id="theme_style_sheet" rel="stylesheet" href="style_theme_1.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>calc</h1>
+      <div class="theme">
+        <p>THEME</p>
+        <div class="toggle_container">
+          <div class="toggle_labels">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+          </div>
+          <div class="toggle_switch">
+            <input type="radio" name="toggle" id="theme_1" />
+            <input type="radio" name="toggle" id="theme_2" />
+            <input type="radio" name="toggle" id="theme_3" />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="output_container"></div>
+      <div class="numpad_container">
+        <button class="numberkey" id="seven">7</button>
+        <button class="numberkey" id="eight">8</button>
+        <button class="numberkey" id="nine">9</button>
+        <button class="del_btn" id="del_Btn">DEL</button>
+        <button class="numberkey" id="four">4</button>
+        <button class="numberkey" id="five">5</button>
+        <button class="numberkey" id="six">6</button>
+        <button id="add_Btn">+</button>
+        <button class="numberkey" id="one">1</button>
+        <button class="numberkey" id="two">2</button>
+        <button class="numberkey" id="three">3</button>
+        <button id="subtract_btn">-</button>
+        <button id="decimal_btn">.</button>
+        <button class="numberkey" id="zero">0</button>
+        <button>/</button>
+        <button>x</button>
+        <button class="reset_btn" id="reset_Btn">RESET</button>
+        <button class="equals_btn" id="equals_Btn">=</button>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
