@@ -46,52 +46,62 @@ function selectTheme() {
 }
 selectTheme();
 
-let numberClicked1;
-let numberClicked2;
+let numberClicked;
 
 let currentNumber;
 let oldNumber;
+let sum;
 
 let x = [];
-let x2 = [];
-let y = [];
 
 // function numberInputs {
-const numberInputs = function () {
-  numberKey.forEach((selected) => {
-    selected.addEventListener("click", function () {
-      numberClicked1 = selected.innerText;
-      x.push(numberClicked1);
-      currentNumber = Number(x.join(""));
-      // console.log(numberClicked1);
-      outputField.innerText = currentNumber;
-    });
+// const numberInputs = function () {
+// Input numbers to create first/current number, Display current number in output field
+numberKey.forEach((selected) => {
+  selected.addEventListener("click", function () {
+    numberClicked = selected.textContent;
+    x.push(numberClicked);
+    currentNumber = Number(x.join(""));
+    outputField.innerText = currentNumber;
+    console.log(
+      `currentnum: ${currentNumber}, numclicked: ${numberClicked}, x: ${x}`
+    );
   });
-};
-numberInputs();
+});
+// };
+// numberInputs();
 
 // Addition Function
 addBtn.addEventListener("click", function () {
   console.log(this.innerText);
-  oldNumber = currentNumber;
+  if (sum >= 1) {
+    oldNumber = sum;
+  } else {
+    oldNumber = currentNumber; // Store current number as old number in preparation for new current number
+  }
+  // reset all previous stored current number values
+  currentNumber = 0;
+  numberClicked = 0;
+  x = [];
 
-  numberKey.forEach((selected) => {
-    selected.addEventListener("click", function () {
-      numberClicked1 = selected.innerText;
-      y.push(numberClicked1);
-      currentNumber = Number(y.join(""));
-      console.log(numberClicked1);
-      outputField.innerText = currentNumber;
-    });
-  });
+  console.log(`old: ${oldNumber}, current: ${currentNumber}`);
 
-  console.log(oldNumber);
+  // numberKey.forEach((selected) => {
+  //   selected.addEventListener("click", function () {
+  //     numberClicked = selected.innerText;
+  //     y.push(numberClicked1);
+  //     currentNumber = Number(y.join(""));
+  //     console.log(numberClicked1);
+  //     outputField.innerText = currentNumber;
+  //   });
+  // });
 });
 
 equalsBtn.addEventListener("click", function () {
   console.log(this.innerText);
-  let sum = oldNumber + currentNumber;
-  console.log(sum);
+  sum = oldNumber + currentNumber;
+  oldNumber = sum;
+  console.log(`sum: ${sum}, old: ${oldNumber}`);
   outputField.innerText = sum;
 });
 
