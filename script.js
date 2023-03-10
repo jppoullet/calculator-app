@@ -49,7 +49,7 @@ selectTheme();
 let numberClicked1;
 let numberClicked2;
 
-let firstNumber;
+let currentNumber;
 let oldNumber;
 
 let x = [];
@@ -62,9 +62,9 @@ const numberInputs = function () {
     selected.addEventListener("click", function () {
       numberClicked1 = selected.innerText;
       x.push(numberClicked1);
-      firstNumber = Number(x.join(""));
+      currentNumber = Number(x.join(""));
       // console.log(numberClicked1);
-      outputField.innerText = firstNumber;
+      outputField.innerText = currentNumber;
     });
   });
 };
@@ -73,15 +73,15 @@ numberInputs();
 // Addition Function
 addBtn.addEventListener("click", function () {
   console.log(this.innerText);
-  oldNumber = firstNumber;
+  oldNumber = currentNumber;
 
   numberKey.forEach((selected) => {
     selected.addEventListener("click", function () {
       numberClicked1 = selected.innerText;
       y.push(numberClicked1);
-      firstNumber = Number(y.join(""));
+      currentNumber = Number(y.join(""));
       console.log(numberClicked1);
-      outputField.innerText = firstNumber;
+      outputField.innerText = currentNumber;
     });
   });
 
@@ -90,7 +90,7 @@ addBtn.addEventListener("click", function () {
 
 equalsBtn.addEventListener("click", function () {
   console.log(this.innerText);
-  let sum = oldNumber + firstNumber;
+  let sum = oldNumber + currentNumber;
   console.log(sum);
   outputField.innerText = sum;
 });
@@ -98,7 +98,7 @@ equalsBtn.addEventListener("click", function () {
 resetBtn.addEventListener("click", function () {
   outputField.innerText = "";
   numberClicked1 = 0;
-  firstNumber = 0;
+  currentNumber = 0;
   oldNumber = 0;
   x = [];
   y = [];
