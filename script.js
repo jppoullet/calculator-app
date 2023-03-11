@@ -10,10 +10,13 @@ const themeStyleSheet = document.getElementById("theme_style_sheet");
 // Calculator Numpad Buttons
 const outputField = document.querySelector(".output_container");
 const resetBtn = document.getElementById("reset_Btn");
-const equalsBtn = document.getElementById("equals_Btn");
+const equalsBtn = document.getElementById("equals_btn");
 const delBtn = document.getElementById("del_btn");
-const addBtn = document.getElementById("add_Btn");
+const operators = document.querySelectorAll(".operator_btn");
+const addBtn = document.getElementById("add_btn");
 const subtractBtn = document.getElementById("subtract_btn");
+const divisionBtn = document.getElementById("division_btn");
+const multiplyBtn = document.getElementById("multiply_btn");
 const seven = document.getElementById("seven");
 const eight = document.getElementById("eight");
 const nine = document.getElementById("nine");
@@ -49,13 +52,12 @@ selectTheme();
 let numberClicked;
 
 let currentNumber;
-let oldNumber;
-let sum;
+let oldNumber = 0;
+let solution;
+let mathOperation;
 
 let x = [];
 
-// function numberInputs {
-// const numberInputs = function () {
 // Input numbers to create first/current number, Display current number in output field
 numberKey.forEach((selected) => {
   selected.addEventListener("click", function () {
@@ -64,52 +66,99 @@ numberKey.forEach((selected) => {
     currentNumber = Number(x.join(""));
     outputField.innerText = currentNumber;
     console.log(
-      `currentnum: ${currentNumber}, numclicked: ${numberClicked}, x: ${x}`
+      `currentnum: ${currentNumber}, oldnum: ${oldNumber} numclicked: ${numberClicked}, x: ${x}`
     );
   });
 });
-// };
-// numberInputs();
+
+// Grabs the symbol of each math operation (+,-,/,*), stores it as variable mathOperation
+operators.forEach((symbol) => {
+  symbol.addEventListener("click", function () {
+    mathOperation = symbol.textContent;
+    console.log(mathOperation);
+    // if (
+    //   (oldNumber > 0 || oldNumber < 0) &&
+    //   (currentNumber > 0 || currentNumber < 0)
+    // ) {
+    //   equals();
+    // }
+
+    if (solution > 0 || solution < 0) {
+      oldNumber = solution;
+    } else {
+      oldNumber = currentNumber; // Store current number as old number in preparation for new current number
+    }
+    // reset all previous stored current number values
+    currentNumber = 0;
+    numberClicked = 0;
+    x = [];
+
+    console.log(`old: ${oldNumber}, current: ${currentNumber}`);
+  });
+});
 
 // Addition Function
-addBtn.addEventListener("click", function () {
-  console.log(this.innerText);
-  if (sum >= 1) {
-    oldNumber = sum;
-  } else {
-    oldNumber = currentNumber; // Store current number as old number in preparation for new current number
+// addBtn.addEventListener("click", function () {
+//   console.log(this.innerText);
+//   if (oldNumber != 0 && currentNumber != 0) {
+//     solution = oldNumber + currentNumber;
+//     oldNumber = solution;
+//     outputField.innerText = solution;
+//   } else if (solution >= 1) {
+//     oldNumber = solution;
+//   } else {
+//     oldNumber = currentNumber; // Store current number as old number in preparation for new current number
+//   }
+//   // reset all previous stored current number values
+//   currentNumber = 0;
+//   numberClicked = 0;
+//   x = [];
+
+//   console.log(`old: ${oldNumber}, current: ${currentNumber}`);
+// });
+
+// addBtn.addEventListener("click", function () {
+//   console.log(this.innerText);
+//   if (solution > 0) {
+//     oldNumber = solution;
+//   } else {
+//     oldNumber = currentNumber; // Store current number as old number in preparation for new current number
+//   }
+//   // reset all previous stored current number values
+//   currentNumber = 0;
+//   numberClicked = 0;
+//   x = [];
+
+//   console.log(`old: ${oldNumber}, current: ${currentNumber}`);
+// });
+
+const equals = function () {
+  // console.log(this.innerText);
+  if (mathOperation == "-") {
+    solution = oldNumber - currentNumber;
+    oldNumber = solution;
+  } else if (mathOperation == "+") {
+    solution = oldNumber + currentNumber;
+    oldNumber = solution;
+  } else if (mathOperation == "*") {
+    solution = oldNumber * currentNumber;
+    oldNumber = solution;
+  } else if (mathOperation == "/") {
+    solution = oldNumber / currentNumber;
+    oldNumber = solution;
   }
-  // reset all previous stored current number values
-  currentNumber = 0;
-  numberClicked = 0;
-  x = [];
-
-  console.log(`old: ${oldNumber}, current: ${currentNumber}`);
-
-  // numberKey.forEach((selected) => {
-  //   selected.addEventListener("click", function () {
-  //     numberClicked = selected.innerText;
-  //     y.push(numberClicked1);
-  //     currentNumber = Number(y.join(""));
-  //     console.log(numberClicked1);
-  //     outputField.innerText = currentNumber;
-  //   });
-  // });
-});
-
-equalsBtn.addEventListener("click", function () {
-  console.log(this.innerText);
-  sum = oldNumber + currentNumber;
-  oldNumber = sum;
-  console.log(`sum: ${sum}, old: ${oldNumber}`);
-  outputField.innerText = sum;
-});
+  console.log(
+    `solution: ${solution}, old: ${oldNumber}, current: ${currentNumber}`
+  );
+  outputField.innerText = solution;
+};
+equalsBtn.addEventListener("click", equals);
 
 resetBtn.addEventListener("click", function () {
   outputField.innerText = "";
-  numberClicked1 = 0;
+  numberClicked = 0;
   currentNumber = 0;
   oldNumber = 0;
+  solution = 0;
   x = [];
-  y = [];
 });
