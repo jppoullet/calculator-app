@@ -52,7 +52,7 @@ selectTheme();
 let numberClicked;
 
 let currentNumber;
-let oldNumber = 0;
+let oldNumber;
 let solution;
 let mathOperation;
 
@@ -84,7 +84,10 @@ operators.forEach((symbol) => {
     // }
 
     if (solution > 0 || solution < 0) {
-      oldNumber = solution;
+      oldNumber = solution; // Store solution as oldNumber after the operation and equals button is pressed
+    } else if (solution === 0) {
+      oldNumber = 0;
+      currentNumber = 0; // Set oldNumber and currentNumber to 0 due in the event math operation equals solution of 0
     } else {
       oldNumber = currentNumber; // Store current number as old number in preparation for new current number
     }
@@ -133,32 +136,44 @@ operators.forEach((symbol) => {
 // });
 
 const equals = function () {
-  // console.log(this.innerText);
-  if (mathOperation == "-") {
-    solution = oldNumber - currentNumber;
-    oldNumber = solution;
-  } else if (mathOperation == "+") {
-    solution = oldNumber + currentNumber;
-    oldNumber = solution;
-  } else if (mathOperation == "*") {
-    solution = oldNumber * currentNumber;
-    oldNumber = solution;
-  } else if (mathOperation == "/") {
-    solution = oldNumber / currentNumber;
-    oldNumber = solution;
+  console.log(this.innerText);
+  if (oldNumber != undefined && currentNumber != undefined) {
+    if (mathOperation == "-") {
+      solution = oldNumber - currentNumber;
+      oldNumber = solution;
+    } else if (mathOperation == "+") {
+      solution = oldNumber + currentNumber;
+      oldNumber = solution;
+    } else if (mathOperation == "*") {
+      solution = oldNumber * currentNumber;
+      oldNumber = solution;
+    } else if (mathOperation == "/") {
+      solution = oldNumber / currentNumber;
+      oldNumber = solution;
+    }
+    console.log(
+      `solution: ${solution}, old: ${oldNumber}, current: ${currentNumber}`
+    );
+    outputField.innerText = solution;
+  } else {
+    alert("numbers are undefined");
+    console.log("numbers are undefined");
   }
-  console.log(
-    `solution: ${solution}, old: ${oldNumber}, current: ${currentNumber}`
-  );
-  outputField.innerText = solution;
+  // ************ CURRENT TASK ***********
+  // numberClicked = 0;
+  // currentNumber = 0;
+  // x = [];
+  // console.log(
+  //   `AFTER solution: ${solution}, old: ${oldNumber}, current: ${currentNumber}`
+  // );
 };
 equalsBtn.addEventListener("click", equals);
 
 resetBtn.addEventListener("click", function () {
   outputField.innerText = "";
   numberClicked = 0;
-  currentNumber = 0;
-  oldNumber = 0;
-  solution = 0;
+  currentNumber = undefined;
   x = [];
+  oldNumber = undefined;
+  solution = 0;
 });
