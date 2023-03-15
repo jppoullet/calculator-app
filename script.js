@@ -61,6 +61,30 @@ let x = [];
 // Input numbers to create first/current number, Display current number in output field
 numberKey.forEach((selected) => {
   selected.addEventListener("click", function () {
+    // ************ CURRENT TASK ***********
+    // if (solution != undefined) {
+    //   solution = undefined;
+    //   oldNumber = undefined;
+    //   numberClicked = undefined;
+    //   currentNumber = undefined;
+    //   x = [];
+
+    //   numberClicked = selected.textContent;
+    //   x.push(numberClicked);
+    //   currentNumber = Number(x.join(""));
+    //   outputField.innerText = currentNumber;
+    //   console.log(
+    //     `currentnum: ${currentNumber}, oldnum: ${oldNumber} numclicked: ${numberClicked}, x: ${x}`
+    //   );
+    // } else {
+    //   numberClicked = selected.textContent;
+    //   x.push(numberClicked);
+    //   currentNumber = Number(x.join(""));
+    //   outputField.innerText = currentNumber;
+    //   console.log(
+    //     `currentnum: ${currentNumber}, oldnum: ${oldNumber} numclicked: ${numberClicked}, x: ${x}`
+    //   );
+    // }
     numberClicked = selected.textContent;
     x.push(numberClicked);
     currentNumber = Number(x.join(""));
@@ -76,20 +100,15 @@ operators.forEach((symbol) => {
   symbol.addEventListener("click", function () {
     mathOperation = symbol.textContent;
     console.log(mathOperation);
-    // if (
-    //   (oldNumber > 0 || oldNumber < 0) &&
-    //   (currentNumber > 0 || currentNumber < 0)
-    // ) {
-    //   equals();
-    // }
 
     if (solution > 0 || solution < 0) {
-      oldNumber = solution; // Store solution as oldNumber after the operation and equals button is pressed
+      oldNumber = solution;
+      // Store solution as oldNumber after the operation and equals button is pressed
     } else if (solution === 0) {
       oldNumber = 0;
       currentNumber = 0; // Set oldNumber and currentNumber to 0 due in the event math operation equals solution of 0
     } else {
-      oldNumber = currentNumber; // Store current number as old number in preparation for new current number
+      oldNumber = currentNumber;
     }
     // reset all previous stored current number values
     currentNumber = 0;
@@ -99,41 +118,6 @@ operators.forEach((symbol) => {
     console.log(`old: ${oldNumber}, current: ${currentNumber}`);
   });
 });
-
-// Addition Function
-// addBtn.addEventListener("click", function () {
-//   console.log(this.innerText);
-//   if (oldNumber != 0 && currentNumber != 0) {
-//     solution = oldNumber + currentNumber;
-//     oldNumber = solution;
-//     outputField.innerText = solution;
-//   } else if (solution >= 1) {
-//     oldNumber = solution;
-//   } else {
-//     oldNumber = currentNumber; // Store current number as old number in preparation for new current number
-//   }
-//   // reset all previous stored current number values
-//   currentNumber = 0;
-//   numberClicked = 0;
-//   x = [];
-
-//   console.log(`old: ${oldNumber}, current: ${currentNumber}`);
-// });
-
-// addBtn.addEventListener("click", function () {
-//   console.log(this.innerText);
-//   if (solution > 0) {
-//     oldNumber = solution;
-//   } else {
-//     oldNumber = currentNumber; // Store current number as old number in preparation for new current number
-//   }
-//   // reset all previous stored current number values
-//   currentNumber = 0;
-//   numberClicked = 0;
-//   x = [];
-
-//   console.log(`old: ${oldNumber}, current: ${currentNumber}`);
-// });
 
 const equals = function () {
   console.log(this.innerText);
@@ -161,7 +145,7 @@ const equals = function () {
   }
   // ************ CURRENT TASK ***********
   // numberClicked = 0;
-  // currentNumber = 0;
+  // currentNumber = undefined;
   // x = [];
   // console.log(
   //   `AFTER solution: ${solution}, old: ${oldNumber}, current: ${currentNumber}`
@@ -175,5 +159,6 @@ resetBtn.addEventListener("click", function () {
   currentNumber = undefined;
   x = [];
   oldNumber = undefined;
-  solution = 0;
+  solution = undefined;
+  console.log("RESET");
 });
