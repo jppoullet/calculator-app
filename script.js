@@ -11,7 +11,7 @@ const themeStyleSheet = document.getElementById("theme_style_sheet");
 const outputField = document.querySelector(".output_container");
 const resetBtn = document.getElementById("reset_Btn");
 const equalsBtn = document.getElementById("equals_btn");
-const delBtn = document.getElementById("del_btn");
+const delBtn = document.getElementById("del_Btn");
 const operators = document.querySelectorAll(".operator_btn");
 const addBtn = document.getElementById("add_btn");
 const subtractBtn = document.getElementById("subtract_btn");
@@ -61,10 +61,10 @@ let equalsClicked;
 numberKey.forEach((selected) => {
   selected.addEventListener("click", function () {
     if (equalsClicked) {
+      equalsClicked = undefined;
       console.log("yes");
       oldNumber = undefined;
       solution = undefined;
-      equalsClicked = undefined;
     }
     if (solution != undefined && oldNumber != undefined) {
       // oldNumber = solution;
@@ -175,3 +175,11 @@ const resetFunc = function () {
 };
 
 resetBtn.addEventListener("click", resetFunc);
+
+delBtn.addEventListener("click", function () {
+  x.pop();
+  console.log(x);
+  currentNumber = Number(x.join(""));
+  console.log(currentNumber);
+  outputField.innerText = currentNumber;
+});
