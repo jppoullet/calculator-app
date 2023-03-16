@@ -50,54 +50,63 @@ function selectTheme() {
 selectTheme();
 
 let numberClicked;
-
 let currentNumber;
 let oldNumber;
 let solution;
 let mathOperation;
-
 let x = [];
+let equalsClicked;
 
 // Input numbers to create first/current number, Display current number in output field
 numberKey.forEach((selected) => {
   selected.addEventListener("click", function () {
-    // ************ CURRENT TASK ***********
-    // if (solution != undefined) {
-    //   solution = undefined;
-    //   oldNumber = undefined;
-    //   numberClicked = undefined;
-    //   currentNumber = undefined;
-    //   x = [];
+    if (equalsClicked) {
+      console.log("yes");
+      oldNumber = undefined;
+      solution = undefined;
+      equalsClicked = undefined;
+    }
+    if (solution != undefined && oldNumber != undefined) {
+      // oldNumber = solution;
+      solution = undefined;
+      numberClicked = undefined;
+      currentNumber = undefined;
+      x = [];
 
-    //   numberClicked = selected.textContent;
-    //   x.push(numberClicked);
-    //   currentNumber = Number(x.join(""));
-    //   outputField.innerText = currentNumber;
-    //   console.log(
-    //     `currentnum: ${currentNumber}, oldnum: ${oldNumber} numclicked: ${numberClicked}, x: ${x}`
-    //   );
-    // } else {
-    //   numberClicked = selected.textContent;
-    //   x.push(numberClicked);
-    //   currentNumber = Number(x.join(""));
-    //   outputField.innerText = currentNumber;
-    //   console.log(
-    //     `currentnum: ${currentNumber}, oldnum: ${oldNumber} numclicked: ${numberClicked}, x: ${x}`
-    //   );
-    // }
-    numberClicked = selected.textContent;
-    x.push(numberClicked);
-    currentNumber = Number(x.join(""));
-    outputField.innerText = currentNumber;
-    console.log(
-      `currentnum: ${currentNumber}, oldnum: ${oldNumber} numclicked: ${numberClicked}, x: ${x}`
-    );
+      numberClicked = selected.textContent;
+      x.push(numberClicked);
+      currentNumber = Number(x.join(""));
+      outputField.innerText = currentNumber;
+      console.log(
+        `1st currentnum: ${currentNumber}, oldnum: ${oldNumber} numclicked: ${numberClicked}, x: ${x}`
+      );
+    } else {
+      numberClicked = selected.textContent;
+      x.push(numberClicked);
+      currentNumber = Number(x.join(""));
+      outputField.innerText = currentNumber;
+      console.log(
+        `currentnum: ${currentNumber}, oldnum: ${oldNumber} numclicked: ${numberClicked}, x: ${x}`
+      );
+    }
+    // numberClicked = selected.textContent;
+    // x.push(numberClicked);
+    // currentNumber = Number(x.join(""));
+    // outputField.innerText = currentNumber;
+    // console.log(
+    //   `currentnum: ${currentNumber}, oldnum: ${oldNumber} numclicked: ${numberClicked}, x: ${x}`
+    // );
   });
 });
 
 // Grabs the symbol of each math operation (+,-,/,*), stores it as variable mathOperation
 operators.forEach((symbol) => {
   symbol.addEventListener("click", function () {
+    if (oldNumber != undefined && currentNumber != undefined) {
+      console.log(mathOperation);
+      equals();
+      console.log("operator pressed, equals function ran");
+    }
     mathOperation = symbol.textContent;
     console.log(mathOperation);
 
@@ -111,7 +120,7 @@ operators.forEach((symbol) => {
       oldNumber = currentNumber;
     }
     // reset all previous stored current number values
-    currentNumber = 0;
+    currentNumber = undefined;
     numberClicked = 0;
     x = [];
 
@@ -120,7 +129,7 @@ operators.forEach((symbol) => {
 });
 
 const equals = function () {
-  console.log(this.innerText);
+  console.log("=");
   if (oldNumber != undefined && currentNumber != undefined) {
     if (mathOperation == "-") {
       solution = oldNumber - currentNumber;
@@ -143,17 +152,19 @@ const equals = function () {
     alert("numbers are undefined");
     console.log("numbers are undefined");
   }
-  // ************ CURRENT TASK ***********
-  // numberClicked = 0;
-  // currentNumber = undefined;
-  // x = [];
-  // console.log(
-  //   `AFTER solution: ${solution}, old: ${oldNumber}, current: ${currentNumber}`
-  // );
-};
-equalsBtn.addEventListener("click", equals);
 
-resetBtn.addEventListener("click", function () {
+  // numberClicked = 0;
+  currentNumber = undefined;
+  console.log(`currentNumber: ${currentNumber}`);
+  x = [];
+};
+
+equalsBtn.addEventListener("click", function () {
+  equals();
+  equalsClicked = true;
+});
+
+const resetFunc = function () {
   outputField.innerText = "";
   numberClicked = 0;
   currentNumber = undefined;
@@ -161,4 +172,6 @@ resetBtn.addEventListener("click", function () {
   oldNumber = undefined;
   solution = undefined;
   console.log("RESET");
-});
+};
+
+resetBtn.addEventListener("click", resetFunc);
