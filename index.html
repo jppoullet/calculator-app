@@ -43,26 +43,36 @@
     <main>
       <div class="output_container"></div>
       <div class="numpad_container">
-        <button class="numberkey" id="seven">7</button>
-        <button class="numberkey" id="eight">8</button>
-        <button class="numberkey" id="nine">9</button>
-        <button class="del_btn" id="del_Btn">DEL</button>
-        <button class="numberkey" id="four">4</button>
-        <button class="numberkey" id="five">5</button>
-        <button class="numberkey" id="six">6</button>
-        <button class="operator_btn" id="add_btn">+</button>
-        <button class="numberkey" id="one">1</button>
-        <button class="numberkey" id="two">2</button>
-        <button class="numberkey" id="three">3</button>
-        <button class="operator_btn" id="subtract_btn">-</button>
+        <button class="numberkey" data-type="number" id="seven">7</button>
+        <button class="numberkey" data-type="number" id="eight">8</button>
+        <button class="numberkey" data-type="number" id="nine">9</button>
+        <button class="del_btn" data-type="del" id="del_Btn">DEL</button>
+        <button class="numberkey" data-type="number" id="four">4</button>
+        <button class="numberkey" data-type="number" id="five">5</button>
+        <button class="numberkey" data-type="number" id="six">6</button>
+        <button class="operator_btn" data-type="operator" id="add_btn">
+          +
+        </button>
+        <button class="numberkey" data-type="number" id="one">1</button>
+        <button class="numberkey" data-type="number" id="two">2</button>
+        <button class="numberkey" data-type="number" id="three">3</button>
+        <button class="operator_btn" data-type="operator" id="subtract_btn">
+          -
+        </button>
         <button class="numberkey" id="decimal_btn">.</button>
-        <button class="numberkey" id="zero">0</button>
-        <button class="operator_btn" id="division_btn">/</button>
-        <button class="operator_btn" id="multiply_btn">*</button>
-        <button class="reset_btn" id="reset_Btn">RESET</button>
-        <button class="equals_btn" id="equals_btn">=</button>
+        <button class="numberkey" data-type="number" id="zero">0</button>
+        <button class="operator_btn" data-type="operator" id="division_btn">
+          /
+        </button>
+        <button class="operator_btn" data-type="operator" id="multiply_btn">
+          *
+        </button>
+        <button class="reset_btn" data-type="reset" id="reset_Btn">
+          RESET
+        </button>
+        <button class="equals_btn" data-type="equals" id="equals_btn">=</button>
       </div>
     </main>
-    <script src="script.js"></script>
+    <script src="script2.js"></script>
   </body>
 </html>
