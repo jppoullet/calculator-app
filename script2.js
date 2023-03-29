@@ -27,6 +27,7 @@ let firstNumber;
 let operator;
 let solution;
 outputField.textContent = "0";
+let decimalAllowed = true;
 
 // Theme Selection Toggle Switch
 function selectTheme() {
@@ -60,13 +61,25 @@ buttons.forEach((keyPressed) => {
     let outputValue = outputField.textContent;
     const type = keyPressed.dataset.type;
 
+    if (type === "decimal") {
+      if (!outputValue.includes(".")) {
+        console.log("includes decimal");
+        outputField.textContent = keyValue;
+        outputField.textContent = outputValue + keyValue;
+      }
+    }
+
     // When a number button is pressed
     if (type == "number") {
       if (previousType === "equals") {
-        firstNumber = "";
+        previousType = type;
+        resetFunc();
+        outputValue = "";
+        outputField.textContent = keyValue;
+        outputField.textContent = outputValue + keyValue;
       }
 
-      if (previousType === "operator" || previousType === "equals") {
+      if (previousType === "operator") {
         previousType = type;
         outputValue = "";
         outputField.textContent = keyValue;
@@ -93,12 +106,6 @@ buttons.forEach((keyPressed) => {
         );
       }
 
-      if (previousType === "equals") {
-        firstNumber = outputValue;
-        console.log(
-          `${keyValue} operator was pressed, ${firstNumber} firstNumber EQUALS stored`
-        );
-      }
       firstNumber = outputValue;
       previousType = type;
       operator = keyValue;
@@ -124,19 +131,19 @@ buttons.forEach((keyPressed) => {
     function equalsFunc() {
       if (operator === "+") {
         console.log(`${keyValue} was pressed, operator was +`);
-        solution = parseInt(firstNumber) + parseInt(outputValue);
+        solution = parseFloat(firstNumber) + parseFloat(outputValue);
       }
       if (operator === "-") {
         console.log(`${keyValue} was pressed, operator was -`);
-        solution = parseInt(firstNumber) - parseInt(outputValue);
+        solution = parseFloat(firstNumber) - parseFloat(outputValue);
       }
       if (operator === "*") {
         console.log(`${keyValue} was pressed, operator was *`);
-        solution = parseInt(firstNumber) * parseInt(outputValue);
+        solution = parseFloat(firstNumber) * parseFloat(outputValue);
       }
       if (operator === "/") {
         console.log(`${keyValue} was pressed, operator was /`);
-        solution = parseInt(firstNumber) / parseInt(outputValue);
+        solution = parseFloat(firstNumber) / parseFloat(outputValue);
       }
     }
 
@@ -146,21 +153,20 @@ buttons.forEach((keyPressed) => {
 
       previousType = type;
       outputField.textContent = solution;
-
-      if (solution === Infinity) {
-        console.log(solution);
-        outputField.textContent = "Ru's a bitch";
-      }
     }
 
     // When reset button is pressed
-    if (type === "reset") {
-      console.log(`${keyValue} was pressed`);
+    function resetFunc() {
       previousType = "";
       firstNumber = "";
       operator = "";
       solution = "";
       outputField.textContent = "0";
+    }
+
+    if (type === "reset") {
+      console.log(`${keyValue} was pressed`);
+      resetFunc();
     }
   });
 });
